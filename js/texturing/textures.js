@@ -1073,7 +1073,7 @@ export class Texture {
 			affected_elements.forEach((element) => {
 				let selected_faces = UVEditor.getSelectedFaces(element);
 				for (var face in element.faces) {
-					if (all || element.box_uv || selected_faces.includes(face)) {
+					if (all || (!selected_faces.length && element.box_uv) || selected_faces.includes(face)) {
 						var f = element.faces[face]
 						if (all !== 'blank' || (f.texture !== null && !f.getTexture())) {
 							f.texture = this.uuid

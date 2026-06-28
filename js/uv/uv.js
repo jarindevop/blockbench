@@ -718,7 +718,10 @@ export const UVEditor = {
 		} else {
 			Undo.initEdit({elements, uv_only: true})
 			elements.forEach(el => {
-				let faces = (el.box_uv || Format.per_group_texture) ? UVEditor.cube_faces : UVEditor.getSelectedFaces(el);
+				let faces = UVEditor.getSelectedFaces(el);
+				if (!faces.length && el.box_uv) {
+					faces = UVEditor.cube_faces;
+				}
 				faces.forEach(face => {
 					if (el.faces[face]) {
 						el.faces[face].texture = texture.uuid;
